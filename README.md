@@ -118,7 +118,7 @@ Privatekey: b09862ccf869d4239e2b79dada56c823a2a51904ef5ac77416e8d931c152b868
 1K9sadcUnMVMCoSvHKKPDGXiWJLwTo9K97  b'5KA4UEWEPB3PqGRYXsK1zkCMnSAcBUSPhHJjVfjhWf28apYt3u4'    == 0
 '''
  
-However, if a balance is found, then the output will include all necessary information about the wallet. A copy of the output will also be saved in a text file titled `rudygen.txt` with all balances in Satoshi. An example is:
+However, if a balance is found, then the output will include all necessary information about the wallet. A copy of the output will also be saved in a text file titled `ruby.txt` with all balances in Satoshi. An example is:
 
 >address: 1JGM6sREUwt5paFEfHNuzvRy7nXtQdaamn<br>
 >private key: 6694e2d40e786839d48b1b699ab9c318514dc0a0f27f2ccaf7f9f32224ead3a8<br>
