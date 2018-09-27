@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Made by Ano.Mobb
-# Rubygen/Ruby generator
+# Ruby generator
 # Donate: 1GmQaG9R5NPs3ZzR6XPMD9jZk17F9MuoWn
 # -*- coding: utf-8 -*-
 import os, binascii, ecdsa, urllib, json, codecs, time, queue
