@@ -73,16 +73,14 @@ d = input("Enter number for API: " + "\n" + "\n" +
 
 def privateKey():
     a = [fobj[random.randrange(len(fobj))]
-         for item in range(int(n))]*(int(f))
-    
-    
-
-    v = (str(a)+(e))
+         for item in range(int(n))]
+    b = ' '.join(a)
+    v = (str(b)+(e))
+   
     privatekey = hashlib.sha256(str(v).encode('utf-8')).hexdigest()
     print ('Passphrase:' + ' ' + str(a))
     print ('Privatekey:' + ' ' + str(privatekey))
     return privatekey
-        
     
 def publicKey(privatekey): 
     privatekey = binascii.unhexlify(privatekey)
