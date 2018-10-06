@@ -125,24 +125,6 @@ However, if a balance is found, then the output will include all necessary infor
 
 #
 
-# Warnings
-
-If you are receiving: 
-
->HTTP Error Code: (number)<br/>
->Retrying in 5 seconds
-
-Or
-
->Unable to connect to API after several attempts<br>
->Retrying in 30 seconds
-
-This program queries Block Explorer API for wallet balances making a HTTP request necessary for complete operation. If connection to the API is found to be unresponsive (failing to return a 200 HTTP status) the program will pause for 5 seconds and attempt to continue.
-
-If you are receiving a lot of errors, visit <a href="https://bitcoinlegacy.blockexplorer.com/">Blockexplorer.com</a> to see if their API might be down.
-
-This program also responds to 429 HTTP responses because of the high frequency of server requests. When a 429 is encountered, the program will print the error `HTTP Error Code: 429`, but will not pause. However, if several 429's are received consecutively, the user will get the result `Unable to connect to API after several attempts` and will be forced to wait 30 seconds until the program continues again.
-
 #
 
 # Efficiency
