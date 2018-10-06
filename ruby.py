@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Made by Ano.Mobb
-# Ruby generator
+# Ruby
 # Donate: 1GmQaG9R5NPs3ZzR6XPMD9jZk17F9MuoWn
 # -*- coding: utf-8 -*-
-import os, binascii, ecdsa, urllib, json, codecs, time, queue
-import hashlib, base58, sys, random, string, requests, base64, operator
+import os, binascii, ecdsa, hashlib, base58, random, requests, time
 
 
 print ("""
@@ -54,21 +53,7 @@ file = input("Enter file name: ")
 fobj = open(file).read().strip().split()
 c = len(fobj)
 n = input("Enter number of passphrases: ")
-f = input("Enter number for repeat word x, press 1 no repeat : ")
 e = input("Enter salt for sha256: ")
-d = input("Enter number for API: " + "\n" + "\n" +
-          "Bitcoinlegacy   (1): " + "\n" +
-          "Blockchain      (2): " + "\n" +
-          "Blockexplorer   (3): " + "\n" +
-          "Insight Bitpay  (4): " + "\n" +
-          "Blockonomics    (5): " + "\n" + 
-          "Blockchyper     (6): " + "\n" +
-          "Chain.so        (7): " + "\n" +
-          "BTC.com         (8): " + "\n" +
-          "Bitstamp        (9): " + "\n" + "\n" + 
-          "Select API: ") + "\n"
-
- 
 
 
 def privateKey():
@@ -81,6 +66,7 @@ def privateKey():
     print ('Passphrase:' + ' ' + str(a))
     print ('Privatekey:' + ' ' + str(privatekey))
     return privatekey
+        
     
 def publicKey(privatekey): 
     privatekey = binascii.unhexlify(privatekey)
@@ -114,262 +100,34 @@ def address(publickey):
     return ''.join(output[::-1])
 
 def balance(address):
-    if int(d != 1):
-        try:
-            API = requests.get("https://bitcoinlegacy.blockexplorer.com/api/addr/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
-            pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
-
-    if int(d != 2):
-        try:
-            API = requests.get("http://blockchain.info/q/addressbalance/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
-            pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
-
-    if int (d != 3):
-        try:
-            API = requests.get("http://blockexplorer.com/api/addr/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
-            pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
-
-
-
-    if int (d != 4):
-        try:
-            API = requests.get("https://insight.bitpay.com/api/addr/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
-            pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
-
-
-
-
-
-    if int (d != 5):
-        try:
-            API = requests.get("https://www.blockonomics.co/api/balance/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
-            pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
-
-
-
-
-    if int (d != 6):
-        try:
-            API = requests.get("https://api.blockcypher.com/v1/dash/main/addrs/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
-            pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
-
-
-    if int (d != 7):
-        try:
-            API = requests.get("https://chain.so/api/v2/get_address_balance/BTC/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
-            pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
-
-
-
-    if int (d != 8):
-        try:
-            API = requests.get("https://chain.api.btc.com/v3/address/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
-            pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
-
-
-
-    if int (d != 9):
-        try:
+    try:
+        API = requests.get("http://blockchain.info/q/addressbalance/" + address + "/balance")
+        if (API.status_code == 429):
             API = requests.get("https://www.bitstamp.net/api/balance/" + address + "/balance")
-            if (API.status_code == 429):
-                pause.p += 1
-                if (pause.p >= 10):
-                    print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                    time.sleep(30)
-                    pause.p = 0
-                    return -1
-                print("\nHTTP Error Code: " + str(API.status_code) + "\n")
-                return -1
-            if (API.status_code != 200 and API.status_code != 400):
-                print("\nHTTP Error Code: " + str(API.status_code) + "\nRetrying in 5 seconds\n")
-                time.sleep(5)
-                return -1
-            balance = int(API.text)
+        if (API.status_code == 429):
+            API = requests.get("http://blockexplorer.com/api/addr/" + address + "/balance")
+        if (API.status_code == 429):
+            API = requests.get("https://insight.bitpay.com/api/addr/" + address + "/balance")
+        if (API.status_code == 429):
+            API = requests.get("https://www.blockonomics.co/api/balance/" + address + "/balance")
+        if (API.status_code == 429):
+            API = requests.get("https://api.blockcypher.com/v1/dash/main/addrs/" + address + "/balance")
+        if (API.status_code == 429):
+            API = requests.get("https://chain.so/api/v2/get_address_balance/BTC/" + address + "/balance")
+        if (API.status_code == 429):
+            API = requests.get("https://chain.api.btc.com/v3/address/" + address + "/balance")
+        if (API.status_code == 429):
+            API = requests.get("https://bitcoinlegacy.blockexplorer.com/api/addr/" + address + "/balance")
+        balance = int(API.text)
+        pause.p = 0
+        return balance
+    except:
+        pause.p += 1
+        if (pause.p >= 10):
+            print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
+            time.sleep(30)
             pause.p = 0
-            return balance
-        except:
-            pause.p += 1
-            if (pause.p >= 10):
-                print ("\nUnable to connect to API after several attempts\nRetrying in 30 seconds\n")
-                time.sleep(30)
-                pause.p = 0
-                return -1
+            return -1
 
 
 
@@ -417,5 +175,9 @@ def Ruby():
 
 print("\n  |--------- Wallet Address ---------||-------------------- Private Key -------------------|--== Balance--- |-Made by Ano.Mobb-| " + ' ' + str(c))
 Ruby()
+
+
+
+
 
 
