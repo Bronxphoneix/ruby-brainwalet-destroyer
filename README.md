@@ -1,4 +1,12 @@
 
+New update!
+
+Removed menu api.
+Now when is error code 400 it's automaticly change to other api, u can use constantly for day's week's.
+
+
+
+
 # Made by Ano.mobb
 
 '''
@@ -38,17 +46,6 @@ $ python ruby.py
 "Enter number of passphrases:
 "Enter number for repeat word x, press 1 no repeat : "
 "Enter salt for sha256: "
-"Enter number for API: "
-"Bitcoinlegacy   (1): "
-"Blockchain      (2): "
-"Blockexplorer   (3): "
-"Insight Bitpay  (4): "
-"Blockonomics    (5): "
-"Blockchyper     (6): "
-"Chain.so        (7): "
-"BTC.com         (8): "
-"Bitstamp        (9): "
-"Select API: "
 
 
 ```
