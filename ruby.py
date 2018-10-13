@@ -7,44 +7,6 @@
 import os, binascii, ecdsa, hashlib, base58, random, requests, time
 
 
-print ("""
-------------------------------------------------
-|                                              |     
-|   -Ruby bitcoin brainwallet bruteforcer:     |
-|      - 1): Enter a file name txt,lst..:      |
-|      - 2): Enter number of passphrases:      |
-|                                              |
-|                                              |
-|  Donate: 1GmQaG9R5NPs3ZzR6XPMD9jZk17F9MuoWn  |
-|                                              |
-| -Author: Ano.Mobb                            |
-|                                              |
-|                                              |
-|                                              |
-| 		                               |
-------------------------------------------------
-             ,----------------,              ,---------,
-        ,-----------------------,          ,"        ,"|
-      ,"                      ,"|        ,"        ,"  |
-     +-----------------------+  |      ,"        ,"    |
-     |  .-----------------.  |  |     +---------+      |
-     |  |                 |  |  |     | -==----'|      |
-     |  |  I LOVE DOS!    |  |  |     |         |      |
-     |  |  Bad command or |  |  |/----|`---=    |      |
-     |  |  C:\>_          |  |  |   ,/|==== ooo |      ;
-     |  |                 |  |  |  // |(((( [33]|    ,"
-     |  `-----------------'  |," .;'| |((((     |  ,"
-     +-----------------------+  ;;  | |         |,"     -Ano.Mobb-
-        /_)______________(_/  //'   | +---------+
-   ___________________________/___  `,
-  /  oooooooooooooooo  .o.  oooo /,   \,"-----------
- / ==ooooooooooooooo==.o.  ooo= //   ,`\--{)B     ,"
-/_==__==========__==_ooo__ooo=_/'   /___________,"
-`-----------------------------'
-
-""")
-
-
 
 class pause:
     p =0
@@ -59,9 +21,9 @@ e = input("Enter salt for sha256: ")
 def privateKey():
     a = [fobj[random.randrange(len(fobj))]
          for item in range(int(n))]
-    b = ' '.join(a)
-    v = (str(b)+(e))
-   
+    d = "" 		 
+    b = d.join(a)
+    v = (str(b))  
     privatekey = hashlib.sha256(str(v).encode('utf-8')).hexdigest()
     print ('Passphrase:' + ' ' + str(a))
     print ('Privatekey:' + ' ' + str(privatekey))
@@ -103,19 +65,9 @@ def balance(address):
     try:
         API = requests.get("http://blockchain.info/q/addressbalance/" + address + "/balance")
         if (API.status_code == 429):
-            API = requests.get("https://www.bitstamp.net/api/balance/" + address + "/balance")
-        if (API.status_code == 429):
             API = requests.get("http://blockexplorer.com/api/addr/" + address + "/balance")
         if (API.status_code == 429):
             API = requests.get("https://insight.bitpay.com/api/addr/" + address + "/balance")
-        if (API.status_code == 429):
-            API = requests.get("https://www.blockonomics.co/api/balance/" + address + "/balance")
-        if (API.status_code == 429):
-            API = requests.get("https://api.blockcypher.com/v1/dash/main/addrs/" + address + "/balance")
-        if (API.status_code == 429):
-            API = requests.get("https://chain.so/api/v2/get_address_balance/BTC/" + address + "/balance")
-        if (API.status_code == 429):
-            API = requests.get("https://chain.api.btc.com/v3/address/" + address + "/balance")
         if (API.status_code == 429):
             API = requests.get("https://bitcoinlegacy.blockexplorer.com/api/addr/" + address + "/balance")
         balance = int(API.text)
@@ -175,7 +127,6 @@ def Ruby():
 
 print("\n  |--------- Wallet Address ---------||-------------------- Private Key -------------------|--== Balance--- |-Made by Ano.Mobb-| " + ' ' + str(c))
 Ruby()
-
 
 
 
