@@ -103,19 +103,9 @@ def balance(address):
     try:
         API = requests.get("http://blockchain.info/q/addressbalance/" + address + "/balance")
         if (API.status_code == 429):
-            API = requests.get("https://www.bitstamp.net/api/balance/" + address + "/balance")
-        if (API.status_code == 429):
             API = requests.get("http://blockexplorer.com/api/addr/" + address + "/balance")
         if (API.status_code == 429):
             API = requests.get("https://insight.bitpay.com/api/addr/" + address + "/balance")
-        if (API.status_code == 429):
-            API = requests.get("https://www.blockonomics.co/api/balance/" + address + "/balance")
-        if (API.status_code == 429):
-            API = requests.get("https://api.blockcypher.com/v1/dash/main/addrs/" + address + "/balance")
-        if (API.status_code == 429):
-            API = requests.get("https://chain.so/api/v2/get_address_balance/BTC/" + address + "/balance")
-        if (API.status_code == 429):
-            API = requests.get("https://chain.api.btc.com/v3/address/" + address + "/balance")
         if (API.status_code == 429):
             API = requests.get("https://bitcoinlegacy.blockexplorer.com/api/addr/" + address + "/balance")
         balance = int(API.text)
@@ -128,12 +118,7 @@ def balance(address):
             time.sleep(30)
             pause.p = 0
             return -1
-
-
-
-
-
-                            
+                     
 def toWIF(privatekey): 
     var80 = "80" + str(privatekey) 
     var = hashlib.sha256(binascii.unhexlify(hashlib.sha256(binascii.unhexlify(var80)).hexdigest())).hexdigest()
